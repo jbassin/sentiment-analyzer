@@ -21,8 +21,39 @@ class Parse:
         return
 
     def get_subtree(self, sentence):
-        corpus = self.parser(sentence)
-        subtrees = list([w for w in corpus if w.head is w][0].lefts)
-        for subtree in subtrees:
-            for descendant in subtree.subtree:
-                print(descendant)
+        corpus = (list(self.parser(sentence).sents)[0])
+        children = list(corpus.root.children)
+        print(self.get_children(children))
+        # for child in children:
+        #     children1 = list(child.children)
+        #     if not children1:
+        #         print('AHH')
+        #     else:
+        #         for child1 in children1:
+        #             children2 = list(child1.children)
+        #             print(children2)
+
+    def get_children(self, parents):
+        if not parents:
+            return None
+        for parent in parents:
+            child = list(parent.children)
+            if not child:
+                return '({})'.format(parent)
+            else:
+                return self.get_children(child)
+
+    def tokens_to_root(self, token):
+        """
+        Walk up the syntactic tree, collecting tokens to the root of the given `token`.
+        :param token: Spacy token
+        :return: list of Spacy tokens
+        """
+        tokens_to_r = []
+        while token.head is not token:
+            tokens_to_r.append(token)
+            token = token.head
+            tokens_to_r.append(token)
+
+        return tokens_to_r
+
