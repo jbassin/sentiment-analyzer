@@ -1,3 +1,3 @@
 # Sentiment Analyzer
 ## BostonHacks Fall 2017
-_Authors:_ Josh Bassin, Mike Djaballah, Jorge Nario
+_Authors:_ Josh Bassin, Mike Djaballah, Jorge Nario.
