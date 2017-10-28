@@ -21,8 +21,7 @@ class Parse:
         return
 
     def get_subtree(self, sentence):
-        corpus = self.parser(sentence)
-        subtrees = list([w for w in corpus if w.head is w][0].lefts)
-        for subtree in subtrees:
-            for descendant in subtree.subtree:
-                print(descendant)
+        corpus = (list(self.parser(sentence).sents)[0]).root
+        print(corpus)
+        print(list(corpus.lefts))
+        print(list(corpus.rights))
