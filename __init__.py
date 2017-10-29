@@ -19,4 +19,4 @@ class TotalParse:
 
 
 parser = TotalParse()
-print(parser.check_keyword('Trump', 1000))
+print(parser.check_keyword('Trump', 100))
