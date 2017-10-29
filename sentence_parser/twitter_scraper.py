@@ -10,13 +10,16 @@ class Twitter:
                                access_token_secret=('zzbzgi27xb5bFoYqbick8CkKNA70w81GUFqdqptaVjLDb'))
         return
 
-    def get_search(self, query, count):
-        return self.api.GetSearch(raw_query='q={}%20&result_type=recent&since=2014-07-19&count={}'.format(query, count))
+    def get_search(self, query, count, id=''):
+        return self.api.GetSearch(raw_query='q={}%20&count={}&id={}'.format(query, count, id))
 
     def get_text(self, query, count):
         return (item.text for item in self.get_search(query, count))
 
 # twit = Twitter()
-# tweets = twit.get_text('Trump', 1000)
+# counter = 0
+# tweets = twit.get_text('Trump', 100)
 # for tweet in tweets:
+#     counter = counter + 1
 #     pprint.pprint(tweet)
+# print(counter)
