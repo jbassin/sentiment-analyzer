@@ -21,3 +21,12 @@ pprint.pprint(sentiment_calc.polarity(parser.get_significant_words('I don\'t hat
 # testimonial = TextBlob("Textblob is amazingly simple to use. What great fun!")
 # print(testimonial.sentiment.polarity)
 # print(boots.similarity(hippos))
+
+
+biglist = []
+bigscorelist = [sentiment_calc.polarity(i) for i in biglist]
+bigpolar = sum([i[0] for i in bigscorelist])
+bigmag = sum([i[0] for i in bigscorelist])
+complete = [bigpolar, bigmag]
+
+print(sentiment_calc.polarity_(complete))
