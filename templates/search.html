@@ -89,11 +89,11 @@
 
 <div class="center-container">
 {% if message %}
-  <h-custom>{{message}}!</h-custom>
+  <title3>{{message}}!</title3>
 {% endif %}
-
-
 </div>
+
+
 <div class="center-container2">
     <h-custom>Search a Phrase!</h-custom>
 </div>
@@ -102,15 +102,15 @@
 <div class="center-container">
     <form method="post" enctype="multipart/form-data" action="/search">
         <label for="key">Keyword: </label>
-        <!--<input type="text" name="key" required='true'/>-->
+        <input type="text" name="key" required='true'/>
         <!--<input type="text" name="key" class="mytext" required='true'/>-->
-        <!--<input type="submit" value="Search Twitter"/>-->
-        <table>
-            <tbody><tr>
-                <td><input name="key" type="text">
-                <input type="submit" value="Search Twitter!"></td>
-            </tr>
-        </tbody></table>
+        <input type="submit" value="Search Twitter"/>
+        <!--<table>-->
+            <!--<tbody><tr>-->
+                <!--<td><input name="key" type="text">-->
+                <!--<input type="submit" value="Search Twitter!"></td>-->
+            <!--</tr>-->
+        <!--</tbody></table>-->
     </form>
 </div>
 
