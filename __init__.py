@@ -28,7 +28,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', message=result)
+    return render_template('index.html')
 
 
 
