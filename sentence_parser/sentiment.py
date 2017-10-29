@@ -6,5 +6,4 @@ class Sentiment:
         return
 
     def get_polarity(self, dictionary):
-        print(dictionary['negate'] * int(TextBlob(dictionary['word']).sentiment.polarity * 100.0))
-        return
+        return dictionary['negate'] * int(TextBlob(dictionary['word']).sentiment.polarity * 100.0)
