@@ -13,7 +13,7 @@ class Sentiment:
         abslist = [abs(n) for n in polarlist]
         if len(polarlist) == 0:
             return 0,0
-        return [sum(polarlist)/len(polarlist), sum(abslist)/len(abslist)]
+        return [sum(polarlist)/len(polarlist) * 1.4, sum(abslist)/len(abslist)]
 
     def polarity_(self, num):
         indifferent = 10
@@ -61,5 +61,5 @@ class Sentiment:
             mag = 'somewhat decisive, but '
         else:
             mag = 'decisive, but '
-        return mag + mod + pol
+        return (mag + mod + pol), 'The value our algorithm assigned to the polarity was {} (-100 to 100).'.format(round(num[0], 2)), 'The value our algorithm assigned to the decisiveness was {} (0 to 100)'.format(round(num[1], 2))
 

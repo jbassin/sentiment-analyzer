@@ -41,8 +41,8 @@ def login():
         key = request.form.get('key')
         quant = 100
         if len(key) != 0:
-            res = parser.check_keyword(key, quant)
-            return render_template('index.html', message=res)
+            res, res1, res2 = parser.check_keyword(key, quant)
+            return render_template('index.html', message=res, message1=res1, message2=res2)
     else:
         return render_template('search.html')
 
