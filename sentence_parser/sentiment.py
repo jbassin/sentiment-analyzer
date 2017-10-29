@@ -6,7 +6,7 @@ class Sentiment:
         return
 
     def get_polarity(self, dictionary):
-        return int(((dictionary['negate'] * TextBlob(dictionary['word']).sentiment.polarity * 10.0) ** 3))
+        return int((dictionary['negate'] * TextBlob(dictionary['word']).sentiment.polarity * 100))
 
     def polarity(self, list):
         polarlist = [self.get_polarity(dictionary) for dictionary in list if self.get_polarity(dictionary) != 0]
@@ -52,14 +52,14 @@ class Sentiment:
             pol = 'indifferent '
 
         if num[1] >= somewhatm:
-            mag = 'mixed, but'
+            mag = 'mixed, but '
         elif num[1] >= neutral:
-            mag = 'somewhat mixed, but'
+            mag = 'somewhat mixed, but '
         elif num[1] >= somewhatd:
-            mag = 'neither decisive nor mixed, but'
+            mag = 'neither decisive nor mixed, but '
         elif num[1] > decisive:
-            mag = 'somewhat decisive, but'
+            mag = 'somewhat decisive, but '
         else:
-            mag = 'decisive, but'
+            mag = 'decisive, but '
         return mag + mod + pol
 
