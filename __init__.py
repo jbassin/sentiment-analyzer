@@ -1,5 +1,7 @@
 from sentence_parser import twitter_scraper
 from sentence_parser import parse, sentiment
+import flask
+from flask import Flask, Response, request, render_template, redirect, url_for
 
 
 class TotalParse:
@@ -19,4 +21,35 @@ class TotalParse:
 
 
 parser = TotalParse()
-print(parser.check_keyword('Trump', 100))
+result = parser.check_keyword('Trump', 100)
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html', message=result)
+
+
+
+# @app.route('/search')
+# def search():
+
+@app.route('/search', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        key = request.form.get('key')
+        quant = 100
+        if len(key) != 0:
+            res = parser.check_keyword(key, quant)
+            return render_template('index.html', message=res)
+    else:
+        return render_template('search.html')
+
+
+# @app.route('/results')
+# def index():
+
+
+if __name__ == "__main__":
+    app.run()

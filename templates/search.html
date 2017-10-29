@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+
+    body {
+        margin: 0;
+        background-color: lightslategrey;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: dimgrey;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4CAF50;
+    }
+
+    title3 {
+        font-size: 250%;
+        text-transform: capitalize;
+    }
+
+    .center-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .center-container2 {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .center-container3 {
+        display: block;
+        margin: 0 auto;
+    }
+
+    label {
+        font-size: 250%;
+        text-transform: capitalize;
+    }
+
+    .mytext {
+        width: 300px;
+        height: 30px;
+        text-align: center;
+        margin: auto;
+    }
+
+    h-custom {
+        font-size: 500%;
+    }
+
+</style>
+</head>
+
+<div class="center-container">
+{% if message %}
+  <h-custom>{{message}}!</h-custom>
+{% endif %}
+
+
+</div>
+<div class="center-container2">
+    <h-custom>Search a Phrase!</h-custom>
+</div>
+
+
+<div class="center-container">
+    <form method="post" enctype="multipart/form-data" action="/search">
+        <label for="key">Keyword: </label>
+        <!--<input type="text" name="key" required='true'/>-->
+        <!--<input type="text" name="key" class="mytext" required='true'/>-->
+        <!--<input type="submit" value="Search Twitter"/>-->
+        <table>
+            <tbody><tr>
+                <td><input name="key" type="text">
+                <input type="submit" value="Search Twitter!"></td>
+            </tr>
+        </tbody></table>
+    </form>
+</div>
+
+
+</body>
+
+
+
+</html>
