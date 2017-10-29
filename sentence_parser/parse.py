@@ -45,14 +45,14 @@ class Parse:
             significant_words.append(local_dictionary)
         for k in token_collection.keys():
             pos = self.parser(k.text)[0].pos_
-            if pos == 'DET' or (pos == 'CCONJ' and self.parser(k.text)[0].text[0].lower() == 'n'):
+            if pos == 'DET' or (pos == 'CCONJ' and self.parser(k.text)[0].text[0].lower() == 'n') or (pos == 'ADV' and self.parser(k.text)[0].text[0].lower() == 'n'):
                 for value in token_collection[k]:
                     pos_local = self.parser(value.text)[0].pos_
-                    if pos_local is 'ADJ' or pos_local is 'ADV' or pos_local is 'VERB':
+                    if pos_local is 'ADJ' or pos_local is 'VERB':
                         for dictionary in significant_words:
                             if dictionary['word'] == value.text:
                                 dictionary['negate'] = -1
-            if pos == 'ADJ' or pos == 'ADV' or pos == 'VERB':
+            if pos == 'ADJ' or pos == 'VERB':
                 for value in token_collection[k]:
                     pos_local = self.parser(value.text)[0].pos_
                     if pos_local == 'ADP' and self.parser(value.text)[0].text[0].lower() == 'w':
