@@ -11,7 +11,7 @@ class TotalParse:
 
     def check_keyword(self, query, count):
         biglist = self.twitter_calc.get_text(query, count)
-        bigscorelist = [self.sentiment_calc.polarity(self.parser.get_significant_words(i)) for i in biglist]
+        bigscorelist = [self.sentiment_calc.polarity(self.parser.get_significant_words(i)) for i in biglist if self.sentiment_calc.polarity(self.parser.get_significant_words(i)) != (0, 0)]
         bigpolar = sum([i[0] for i in bigscorelist])/len([i[0] for i in bigscorelist])
         bigmag = sum([i[1] for i in bigscorelist])/len([i[1] for i in bigscorelist])
         complete = [bigpolar, bigmag]
@@ -19,4 +19,4 @@ class TotalParse:
 
 
 parser = TotalParse()
-print(parser.check_keyword('death', 100))
+print(parser.check_keyword('Trump', 1000))

@@ -52,14 +52,14 @@ class Sentiment:
             pol = 'indifferent '
 
         if num[1] >= somewhatm:
-            mag = 'mixed '
+            mag = 'mixed, but'
         elif num[1] >= neutral:
-            mag = 'somewhat mixed '
+            mag = 'somewhat mixed, but'
         elif num[1] >= somewhatd:
-            mag = 'neither decisive nor mixed '
+            mag = 'neither decisive nor mixed, but'
         elif num[1] > decisive:
-            mag = 'somewhat decisive '
+            mag = 'somewhat decisive, but'
         else:
-            mag = 'decisive '
+            mag = 'decisive, but'
         return mag + mod + pol
 
