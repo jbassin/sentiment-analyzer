@@ -16,9 +16,9 @@ class Sentiment:
         return [sum(polarlist)/len(polarlist), sum(abslist)/len(abslist)]
 
     def polarity_(self, num):
-        indifferent = 20
-        weak = 40
-        mild = 70
+        indifferent = 10
+        weak = 30
+        mild = 50
         decisive = 20
         somewhatd = 37
         neutral = 62
