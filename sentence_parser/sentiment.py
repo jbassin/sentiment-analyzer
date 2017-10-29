@@ -25,41 +25,41 @@ class Sentiment:
         somewhatm = 80
 
         if num[0] > 0:
-            pol = 'positive'
+            pol = 'positive '
             if abs(num[0]) >= mild:
-                mod = 'strong'
+                mod = 'strong '
             elif abs(num[0]) >= weak:
-                mod = 'mild'
+                mod = 'mild '
             elif abs(num[0]) >= indifferent:
-                mod = 'weak'
+                mod = 'weak '
             else:
                 pol = ''
-                mod = 'indifferent'
+                mod = 'indifferent '
 
         elif num[0] < 0:
-            pol = 'negative'
+            pol = 'negative '
             if abs(num[0]) >= mild:
-                mod = 'strong'
+                mod = 'strong '
             elif abs(num[0]) >= weak:
-                mod = 'mild'
+                mod = 'mild '
             elif abs(num[0]) >= indifferent:
-                mod = 'weak'
+                mod = 'weak '
             else:
                 pol = ''
-                mod = 'indifferent'
+                mod = 'indifferent '
         else:
-            mod = 'very'
-            pol = 'indifferent'
+            mod = 'very '
+            pol = 'indifferent '
 
         if num[1] >= somewhatm:
-            mag = 'mixed'
+            mag = 'mixed '
         elif num[1] >= neutral:
-            mag = 'somewhat mixed'
+            mag = 'somewhat mixed '
         elif num[1] >= somewhatd:
-            mag = 'neither decisive nor mixed'
+            mag = 'neither decisive nor mixed '
         elif num[1] > decisive:
-            mag = 'somewhat decisive'
+            mag = 'somewhat decisive '
         else:
-            mag = 'decisive'
+            mag = 'decisive '
         return mag + mod + pol
 
