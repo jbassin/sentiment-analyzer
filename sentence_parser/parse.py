@@ -1,4 +1,5 @@
 import spacy
+import pprint
 
 
 class Parse:
@@ -20,40 +21,61 @@ class Parse:
                 print(word.text, word.tag_)
         return
 
-    def get_subtree(self, sentence):
-        corpus = (list(self.parser(sentence).sents)[0])
-        children = list(corpus.root.children)
-        print(self.get_children(children))
-        # for child in children:
-        #     children1 = list(child.children)
-        #     if not children1:
-        #         print('AHH')
-        #     else:
-        #         for child1 in children1:
-        #             children2 = list(child1.children)
-        #             print(children2)
+    def sanitize_sentence(self, sentence):
+        tokens = self.parser(sentence)
+        output_tokens = [x if x.text != 'n\'t' else self.parser('not')[0] for x in tokens]
+        return output_tokens
 
-    def get_children(self, parents):
-        if not parents:
-            return None
-        for parent in parents:
-            child = list(parent.children)
-            if not child:
-                return '({})'.format(parent)
-            else:
-                return self.get_children(child)
+    def get_subtree(self, sentence):
+        token_collection = {}
+        for token in self.sanitize_sentence(sentence):
+            pos = self.parser(token.text)[0].pos_
+            if pos is 'ADJ' or pos is 'VERB' or pos is 'ADV' or pos is 'CCONJ' or pos is 'DET' or pos is 'ADP':
+                token_collection[token] = list()
+                for dependent_token in self.tokens_to_root(token):
+                    token_collection[token].append(dependent_token)
+                token_collection[token] = list(set(token_collection[token]))
+        pprint.pprint(token_collection)
+        return token_collection
+
+    def get_significant_words(self, sentence):
+        token_collection = self.get_subtree(sentence)
+        significant_words = []
+        for k in token_collection.keys():
+            local_dictionary = dict()
+            local_dictionary['pos'] = self.parser(k.text)[0].pos_[0]
+            local_dictionary['word'] = str(k.text)
+            significant_words.append(local_dictionary)
+        for k in token_collection.keys():
+            pos = self.parser(k.text)[0].pos_
+            if pos == 'DET' or (pos == 'CCONJ' and self.parser(k.text)[0].text[0].lower() == 'n'):
+                for value in token_collection[k]:
+                    pos_local = self.parser(value.text)[0].pos_
+                    if pos_local is 'ADJ' or pos_local is 'ADV' or pos_local is 'VERB':
+                        for dictionary in significant_words:
+                            if dictionary['word'] == value.text:
+                                dictionary['negate'] = -1
+            if pos == 'ADJ' or pos == 'ADV' or pos == 'VERB':
+                for value in token_collection[k]:
+                    pos_local = self.parser(value.text)[0].pos_
+                    if pos_local == 'ADP' and self.parser(value.text)[0].text[0].lower() == 'w':
+                        for dictionary in significant_words:
+                            if dictionary['word'] == k.text:
+                                dictionary['negate'] = -1
+        cleaned_significant_words = significant_words.copy()
+        for dictionary in significant_words:
+            if self.parser(dictionary['word'])[0].pos_ == 'DET' or self.parser(dictionary['word'])[0].pos_ == 'CCONJ' or self.parser(dictionary['word'])[0].pos_ == 'ADP':
+                cleaned_significant_words.remove(dictionary)
+        for dictionary in cleaned_significant_words:
+            if 'negate' not in dictionary:
+                dictionary['negate'] = 1
+        return cleaned_significant_words
+
 
     def tokens_to_root(self, token):
-        """
-        Walk up the syntactic tree, collecting tokens to the root of the given `token`.
-        :param token: Spacy token
-        :return: list of Spacy tokens
-        """
-        tokens_to_r = []
+        tokens_to_root = []
         while token.head is not token:
-            tokens_to_r.append(token)
+            tokens_to_root.append(token)
             token = token.head
-            tokens_to_r.append(token)
-
-        return tokens_to_r
-
+            tokens_to_root.append(token)
+        return tokens_to_root
