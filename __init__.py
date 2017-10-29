@@ -4,11 +4,11 @@ import pprint
 
 parser = parse.Parse()
 sentiment_calc = sentiment.Sentiment()
-for dictionary in parser.get_significant_words('I don\'t hate not loving life'):
-    pprint.pprint(dictionary)
-    pprint.pprint(sentiment_calc.get_polarity(dictionary))
+# for dictionary in parser.get_significant_words('I don\'t hate not loving life'):
+#     pprint.pprint(dictionary)
+pprint.pprint(sentiment_calc.polarity(parser.get_significant_words('I don\'t hate not loving life')))
 
-pprint.pprint(int(TextBlob('I don\'t hate not loving life').sentiment.polarity * 100.0))
+# pprint.pprint(int(TextBlob('I don\'t hate not loving life').sentiment.polarity * 100.0))
 
 # pprint.pprint(parser.get_significant_words('I don\'t hate not loving life'))
 
