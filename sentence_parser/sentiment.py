@@ -11,6 +11,8 @@ class Sentiment:
     def polarity(self, list):
         polarlist = [self.get_polarity(dictionary) for dictionary in list if self.get_polarity(dictionary) != 0]
         abslist = [abs(n) for n in polarlist]
+        if len(polarlist) == 0:
+            return 0,0
         return [sum(polarlist)/len(polarlist), sum(abslist)/len(abslist)]
 
     def polarity_(self, num):

@@ -1,30 +1,14 @@
+from sentence_parser import twitter_scraper
 from sentence_parser import parse, sentiment
-from textblob import TextBlob
-import pprint
+
+
 
 parser = parse.Parse()
 sentiment_calc = sentiment.Sentiment()
-# for dictionary in parser.get_significant_words('I don\'t hate not loving life'):
-#     pprint.pprint(dictionary)
-pprint.pprint(sentiment_calc.polarity(parser.get_significant_words('I don\'t hate not loving life')))
-
-# pprint.pprint(int(TextBlob('I don\'t hate not loving life').sentiment.polarity * 100.0))
-
-# pprint.pprint(parser.get_significant_words('I don\'t hate not loving life'))
-
-
-# parser = parse.Parse()
-# # parser.get_significant_words('Those who find ugly meanings in beautiful things are corrupt without being charming.')
-# pprint.pprint(parser.get_significant_words('I don\'t hate not loving life'))
-
-# from textblob import TextBlob
-# testimonial = TextBlob("Textblob is amazingly simple to use. What great fun!")
-# print(testimonial.sentiment.polarity)
-# print(boots.similarity(hippos))
-
-
-biglist = []
-bigscorelist = [sentiment_calc.polarity(i) for i in biglist]
+twitter_calc = twitter_scraper.Twitter()
+biglist = twitter_calc.get_text('Trump', 100)
+# biglist = []
+bigscorelist = [sentiment_calc.polarity(parser.get_significant_words(i)) for i in biglist]
 bigpolar = sum([i[0] for i in bigscorelist])
 bigmag = sum([i[0] for i in bigscorelist])
 complete = [bigpolar, bigmag]

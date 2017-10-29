@@ -21,5 +21,5 @@ class Twitter:
 # tweets = twit.get_text('Trump', 100)
 # for tweet in tweets:
 #     counter = counter + 1
-#     pprint.pprint(tweet)
+#     print(tweet.split('\'')[0])
 # print(counter)
