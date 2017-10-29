@@ -1,5 +1,4 @@
 import spacy
-import pprint
 
 
 class Parse:
@@ -35,7 +34,6 @@ class Parse:
                 for dependent_token in self.tokens_to_root(token):
                     token_collection[token].append(dependent_token)
                 token_collection[token] = list(set(token_collection[token]))
-        pprint.pprint(token_collection)
         return token_collection
 
     def get_significant_words(self, sentence):
