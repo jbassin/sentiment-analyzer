@@ -41,7 +41,6 @@ class Parse:
         significant_words = []
         for k in token_collection.keys():
             local_dictionary = dict()
-            local_dictionary['pos'] = self.parser(k.text)[0].pos_[0]
             local_dictionary['word'] = str(k.text)
             significant_words.append(local_dictionary)
         for k in token_collection.keys():

@@ -1,11 +1,10 @@
-from nltk.corpus import wordnet as wn
-
+from textblob import TextBlob
 
 class Sentiment:
 
     def __init__(self):
-        self.sentiment = wn
         return
 
-    def test(self, s):
-        return self.sentiment.synsets(s)
+    def get_polarity(self, dictionary):
+        print(dictionary['negate'] * int(TextBlob(dictionary['word']).sentiment.polarity * 100.0))
+        return
