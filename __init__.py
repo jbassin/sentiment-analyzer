@@ -39,10 +39,10 @@ def index():
 def login():
     if request.method == 'POST':
         key = request.form.get('key')
-        quant = 100
+        quant = 250
         if len(key) != 0:
-            res, res1, res2 = parser.check_keyword(key, quant)
-            return render_template('index.html', message=res, message1=res1, message2=res2)
+            res, res1, res2, res3 = parser.check_keyword(key, quant)
+            return render_template('index.html', message=res, message1=res1, message2=res2, message3=res3)
     else:
         return render_template('search.html')
 

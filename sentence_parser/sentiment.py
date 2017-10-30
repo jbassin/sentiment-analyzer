@@ -61,5 +61,15 @@ class Sentiment:
             mag = 'somewhat decisive, but '
         else:
             mag = 'decisive, but '
-        return (mag + mod + pol), 'The value our algorithm assigned to the polarity was {} (-100 to 100).'.format(round(num[0], 2)), 'The value our algorithm assigned to the decisiveness was {} (0 to 100)'.format(round(num[1], 2))
+
+        stockString = ''
+        if num[0] > 40:
+            stockString = 'There\'s very high opinion of this topic right now! Value is expected to rise.'
+        elif num[0] > -40:
+            stockString = 'Opinion tends towards the middle, value is expected to level out'
+        else:
+            stockString = 'There\'s very low opinion of this topic right now! Value is expected to drop.'
+
+
+        return (mag + mod + pol), 'The value our algorithm assigned to the polarity was {} (-100 to 100).'.format(round(num[0], 2)), 'The value our algorithm assigned to the decisiveness was {} (0 to 100)'.format(round(num[1], 2)), stockString
 
